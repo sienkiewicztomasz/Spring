@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
+    <link href="../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not#lists.isEmpty(customers)}">
+        <h2>Customers List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>AddressLineOne</th>
+                <th>GetAddressLineTwo</th>
+                <th>City</th>
+                <th>State</th>
+                <th>ZipCode</th>
+            </tr>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}">1</td>
+                <td th:text="${customer.firstName}">ToM</td>
+                <td th:text="${customer.lastName}">Jons</td>
+                <td th:text="${customer.email}">google@gmail.com</td>
+                <td th:text="${customer.phoneNumber}">777-777-777</td>
+                <td th:text="${customer.addressLineOne}">avenue</td>
+                <td th:text="${customer.getAddressLineTwo}">12</td>
+                <td th:text="${customer.city}">New York</td>
+                <td th:text="${customer.state}">New York</td>
+                <td th:text="${customer.zipCode}">66666</td>
+                <td>
+                    <a th:href="${'/customer/' + customer.id}">Show</a> <br/>
+                    <a th:href="${'/customer/edit/' + customer.id}">Edit</a> <br/>
+                    <a th:href="${'/customer/delete/' + customer.id}">Delete</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="${'/customer/new'}">New Customer</a>
+        </div>
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(customers)}">
+    <h2>Customer List</h2>
+    <h3>Empty resource</h3>
+    <a th:href="${'/customer/new'}">New Customer</a>
+</div>
+
+</body>
+</html>
